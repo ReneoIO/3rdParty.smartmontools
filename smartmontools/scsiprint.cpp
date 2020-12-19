@@ -2129,8 +2129,10 @@ scsiGetDriveInfo(scsi_device * device, uint8_t * peripheral_type, bool all)
     // See if transport protocol is known
     if (transport < 0)
         transport = scsiFetchTransportProtocol(device, modese_len);
-    if ((transport >= 0) && (transport <= 0xf))
+    if ((transport >= 0) && (transport <= 0xf)) {
         pout("Transport protocol:   %s\n", transport_proto_arr[transport]);
+        jglb["transport_protocol"] = transport_proto_arr[transport];
+    }
 
     // print current time and date and timezone
     time_t now = time(0);
